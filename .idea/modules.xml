@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ssmp-common/ssmp-common.iml" filepath="$PROJECT_DIR$/ssmp-common/ssmp-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager/ssmp-manager.iml" filepath="$PROJECT_DIR$/ssmp-manager/ssmp-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager/ssmp-manager-interface/ssmp-manager-interface.iml" filepath="$PROJECT_DIR$/ssmp-manager/ssmp-manager-interface/ssmp-manager-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager/ssmp-manager-mapper/ssmp-manager-mapper.iml" filepath="$PROJECT_DIR$/ssmp-manager/ssmp-manager-mapper/ssmp-manager-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager/ssmp-manager-pojo/ssmp-manager-pojo.iml" filepath="$PROJECT_DIR$/ssmp-manager/ssmp-manager-pojo/ssmp-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager/ssmp-manager-service/ssmp-manager-service.iml" filepath="$PROJECT_DIR$/ssmp-manager/ssmp-manager-service/ssmp-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-manager-web/ssmp-manager-web.iml" filepath="$PROJECT_DIR$/ssmp-manager-web/ssmp-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssmp-parent/ssmp-parent.iml" filepath="$PROJECT_DIR$/ssmp-parent/ssmp-parent.iml" />
+    </modules>
+  </component>
+</project>

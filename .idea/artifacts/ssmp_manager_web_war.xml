@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ssmp-manager-web:war">
+    <output-path>$PROJECT_DIR$/ssmp-manager-web/target</output-path>
+    <root id="archive" name="ssmp-manager-web.war">
+      <element id="artifact" artifact-name="ssmp-manager-web:war exploded" />
+    </root>
+  </artifact>
+</component>

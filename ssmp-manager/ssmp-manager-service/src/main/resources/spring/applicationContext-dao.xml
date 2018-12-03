@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <!-- 配置 读取properties文件 jdbc.properties -->
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+
+    <!-- 配置 数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+    </bean>
+
+    <!-- 配置SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+        <!-- 设置MyBatis核心配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 设置数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 别名包扫描 -->
+        <property name="typeAliasesPackage" value="com.zqh.example.pojo"/>
+        <!--全局配置-->
+        <property name="globalConfig" ref="globalConfig"/>
+        <!--插件-->
+        <property name="plugins">
+            <array>
+                <!--分页插件-->
+                <bean id="paginationInterceptor"
+                      class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"/>
+                <!--执行分析插件-->
+                <bean id="explainInterceptor" class="com.baomidou.mybatisplus.extension.plugins.SqlExplainInterceptor"/>
+                <!--性能分析插件-->
+                <bean id="performanceInterceptor"
+                      class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor">
+                    <property name="maxTime" value="100"/>
+                    <!--SQL是否格式化 默认false-->
+                    <property name="format" value="true"/>
+                </bean>
+                <!--乐观锁插件-->
+                <bean id="lockerInterceptor" class="com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor"/>
+            </array>
+        </property>
+    </bean>
+    <!--全局配置-->
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+        <!--逻辑删除-->
+        <property name="sqlInjector" ref="logicSqlInjector"/>
+        <!--dbConfig-->
+        <property name="dbConfig" ref="dbConfig"/>
+    </bean>
+    <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig">
+        <property name="logicDeleteValue" value="1"/>
+        <property name="logicNotDeleteValue" value="0"/>
+    </bean>
+    <!--逻辑删除,用@TableLogic注解对应字段-->
+    <bean id="logicSqlInjector" class="com.baomidou.mybatisplus.extension.injector.LogicSqlInjector"/>
+    <!-- Mapper扫描包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zqh.example.mapper"/>
+    </bean>
+</beans>
